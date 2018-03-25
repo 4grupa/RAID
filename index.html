@@ -1,42 +1,182 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<p>RAID .</p>
-<style>
-img {
-    position: absolute;
-}
-#img2{
-marginLeft = '500px';
-}
-#img1{
-marginLeft = '100px';
-}
-</style>
-<button onclick="setTimeout(myFunction, 1000);">Aiziet</button>
-<input type="text" name="fname">
-<img src="untitled.png" id ="img1"/>
-<img src="untitled.png" id ="img2"/>
-
-<script>
-function myFunction() {
-img=document.getElementById("img1");
-img.style.marginLeft = '100px';
-img2=document.getElementById("img2");
-img2.style.marginLeft = '300px';
-setTimeout(myFunction2, 1000);
- //   alert('Hello');
-}
-function myFunction2() {
-img=document.getElementById("img1");
-img.style.marginLeft = '100px';
-img2=document.getElementById("img2");
-img2.style.marginLeft = '100px';
-img2.style.marginTop='-50px';
- //   alert('Hello');
-}
-</script>
-
-</body>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="raid.js"></script>
+	</head>
+	<body>
+	<p> Ievadi disku skaitu<p>
+		<input type="number" id="raidCount" value="2" maxLength="3">
+		
+		<select name="raidlist" form="raidlist" id="raidlist">
+  <option value="raid0">RAID0</option>
+  <option value="raid1">RAID1</option>
+  <option value="raid2">RAID2</option>
+  <option value="raid3">RAID3</option>
+  <option value="raid4">RAID4</option>
+  <option value="raid5">RAID5</option>
+  <option value="raid6">RAID6</option>
+</select>
+<button id="getRaid" onclick="getRaid()">Aiziet</button>
+<div id="forRaidArray">
+</div>
+	</body>
 </html>
+<script>
+function getRaid(){
+var raidCount = document.getElementById("raidCount").value;
+var raid = document.getElementById("raidlist").value;
+         var forRaidArray = document.getElementById('forRaidArray');
+	while (forRaidArray.firstChild) {
+	forRaidArray.removeChild(forRaidArray.firstChild);
+	}
+
+switch (raid) {
+    case "raid0":
+
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            iterator++;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode('A'+iterator))
+                
+                tr.appendChild(td)
+            
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+        break;
+    case "raid1":
+            var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+		iterator++;
+        for (var j = 0; j < raidCount; j++) {
+            
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode('A'+iterator))
+                
+                tr.appendChild(td)
+            
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+        break;
+    case "raid2":
+        
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+	iterator=0;
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            iterator++;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+                
+                tr.appendChild(td)
+            
+        }
+		for (var j = 0; j < raidCount-1; j++) {
+            iterator++;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'+(j+1)))
+                
+                tr.appendChild(td)
+            
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+        break;
+    case "raid3":
+                    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+	var iteratorStart=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+		iteratorStart=iterator;
+        for (var j = 0; j < raidCount; j++) {
+            
+                var td = document.createElement('td');
+				if (j!=raidCount-1){
+				iterator++;
+                td.appendChild(document.createTextNode('A'+iterator));
+                }
+				else
+				{
+				td.appendChild(document.createTextNode('Ap('+iteratorStart+'-'+iterator+')'));
+				}
+                tr.appendChild(td)
+				
+            
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+        break;
+    case "raid4":
+              
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+	iterator=0;
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            iterator++;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+                
+                tr.appendChild(td)
+            
+        }
+	
+            iterator++;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+                
+                tr.appendChild(td)
+            
+        
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+        break;
+    case "raid5":
+        //toDo
+        break;
+    case "raid6":
+       //toDo
+}}
+
+
+</script>
