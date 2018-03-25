@@ -48,8 +48,9 @@ switch (raid) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode('A'+iterator))
+                coloring(td,0);
                 
-                tr.appendChild(td)
+                tr.appendChild(td);
             
         }
         tbdy.appendChild(tr);
@@ -70,6 +71,7 @@ switch (raid) {
             
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode('A'+iterator))
+                coloring(td,0);
                 
                 tr.appendChild(td)
             
@@ -93,16 +95,18 @@ switch (raid) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+                coloring(td,i);
                 
-                tr.appendChild(td)
+                tr.appendChild(td);
             
         }
 		for (var j = 0; j < raidCount-1; j++) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'+(j+1)))
+                coloring(td,i);
                 
-                tr.appendChild(td)
+                tr.appendChild(td);
             
         }
         tbdy.appendChild(tr);
@@ -123,6 +127,8 @@ switch (raid) {
         for (var j = 0; j < raidCount; j++) {
             
                 var td = document.createElement('td');
+			//	coloring(td,i);
+              //toDo  
 				if (j!=raidCount-1){
 				iterator++;
                 td.appendChild(document.createTextNode('A'+iterator));
@@ -154,16 +160,19 @@ switch (raid) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+				coloring(td,i);
                 
-                tr.appendChild(td)
+                tr.appendChild(td);
             
         }
 	
             iterator++;
                 var td = document.createElement('td');
+coloring(td,i);
+                
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
                 
-                tr.appendChild(td)
+                tr.appendChild(td);
             
         
         tbdy.appendChild(tr);
@@ -172,11 +181,116 @@ switch (raid) {
     forRaidArray.appendChild(tbl);
         break;
     case "raid5":
-        //toDo
-        break;
+          
+              
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+	
+	var iterator2=parseInt(raidCount);
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i <= raidCount; i++) {
+	iterator=0;
+        var tr = document.createElement('tr');
+        for (var j = 0; j <= raidCount; j++) {
+            iterator++;
+                var td = document.createElement('td');
+				     if (iterator2 == j)
+					 
+			   {
+			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+			   }
+			 else{
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+				}
+				coloring(td,i);
+                
+                tr.appendChild(td);
+            
+        }
+	iterator2--;
+            iterator++;
+
+            
+        
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+	break;
     case "raid6":
-       //toDo
+              
+              
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+	var iterator=0;
+	
+	var iterator2=parseInt(raidCount)+2;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i <= parseInt(raidCount)+1; i++) {
+	iterator=0;
+        var tr = document.createElement('tr');
+        for (var j = 0; j <= parseInt(raidCount)+1; j++) {
+            iterator++;
+                var td = document.createElement('td');
+				     if (iterator2 == j+1)
+					 
+			   {
+			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'q'));
+			   iterator--;
+			   }
+			   else if (iterator2 == j+2)
+					 
+			   {
+			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+			   iterator--;
+			   }
+			 else{
+			 if (iterator2==1&&iterator==parseInt(raidCount)+1)
+			   {
+			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+			   }else
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
+				}
+				
+				coloring(td,i);
+                
+                tr.appendChild(td);
+            
+        }
+	iterator2--;
+            iterator++;
+
+            
+        
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+	break;
 }}
+function coloring(td, i)
+{
+switch(i){
+				case 0:
+				td.style.backgroundColor="#FFB266";
+				break
+				case 1:
+				td.style.backgroundColor="yellow";
+				break;
+				case 2:
+				td.style.backgroundColor="#66FF66";
+				break;
+				case 3:
+				td.style.backgroundColor="#99FFFF";
+				break;
+				case 4:
+				td.style.backgroundColor="#6666FF";
+				break;
+				}
+}
 
 
 </script>
