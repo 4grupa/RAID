@@ -78,7 +78,7 @@ switch (raid) {
     tb2.setAttribute('border', '1');
     var iterator= 0;
     var tbdy = document.createElement('tbody');
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < (count/2)+3; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             info = raidInfo.charAt(iterator);
