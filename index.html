@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="number" id="raidInfo" maxLength="100">
+        <input type="number" id="raidInfo" value="1001" maxLength="100">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -70,32 +70,39 @@ switch (raid) {
     forRaidArray.appendChild(tbl);
 
 // tabula, kas paredzēta informācijas attēlošanai raid 0 masīvam
+ var raid0in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 0 masīvā." );
+    forRaidArray.appendChild(raid0in);
 
-   /*var raid0in = document.getElementById('pText').innerHTML = "Tabula, kas attēlo ievadīto informāciju: " + raidInfo + " , redzama nākamajā tabulā." ;*/
-
-    var tbl = document.createElement('table');
-    tbl.style.width = '100%';
-    tbl.setAttribute('border', '1');
+    var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+    var iterator= 0;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < count; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-                var td = document.createElement('td');
-                td.appendChild(document.createTextNode(raidInfo.charAt(i)))
-                coloring(td,0);
+            info = raidInfo.charAt(iterator);
+            iterator++;
+             var td = document.createElement('td');
+                td.height = '20'
+                td.appendChild(document.createTextNode(info))
+                if (info != '')
+                    coloring(td,0);
+                else 
+                    coloring(td,7);
                 tr.appendChild(td);    
         }
         tbdy.appendChild(tr);
     }
-    tbl.appendChild(tbdy);
-    forRaidArray.appendChild(tbl);
-
+    tb2.appendChild(tbdy);
+    forRaidArray.appendChild(tb2);
         break;
 
 // raid 1
     case "raid1":
     var raid1 = document.getElementById('pText').innerHTML = "RAID 1 masīvs izveido precīzu datu kopuma kopiju uz diviem vai vairāk diskiem. Tas ir ļoti noderīgi gadījumā, ja datu nolasīšanas ātrums un datu drošība ir svarīgāki faktori par datu glabātuves ietilpību.";
-            var tbl = document.createElement('table');
+    
+    var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
 	var iterator=0;
@@ -117,25 +124,33 @@ switch (raid) {
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
 
-// tabula, kas paredzēta informācijas attēlošanai raid 1 masīvam
+// tabula, kas paredzēta ielasītās informācijas attēlošanai raid 1 masīvam
+    var raid0in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 1 masīvā." );
+    forRaidArray.appendChild(raid0in);
 
-   /*var raid1in = document.getElementById('pText').innerHTML = "Tabula, kas attēlo ievadīto informāciju: " + raidInfo + " , redzama nākamajā tabulā." ;*/
-    var tbl = document.createElement('table');
-    tbl.style.width = '100%';
-    tbl.setAttribute('border', '1');
+    var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+    var iterator= 0;
     var tbdy = document.createElement('tbody');
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < count +3; i++) {
         var tr = document.createElement('tr');
+        info = raidInfo.charAt(iterator);
+        iterator++;
         for (var j = 0; j < raidCount; j++) {
                 var td = document.createElement('td');
-                td.appendChild(document.createTextNode(raidInfo.charAt(i)))
-                coloring(td,0);
+                td.height = '20'
+                td.appendChild(document.createTextNode(info))
+                if (info != '')
+                    coloring(td,0);
+                else 
+                    coloring(td,7);
                 tr.appendChild(td);    
         }
         tbdy.appendChild(tr);
     }
-    tbl.appendChild(tbdy);
-    forRaidArray.appendChild(tbl);
+    tb2.appendChild(tbdy);
+    forRaidArray.appendChild(tb2);
         break;
 
 // raid 2
@@ -354,6 +369,9 @@ switch(i){
 				case 4:
 				td.style.backgroundColor="#6666FF";
 				break;
+                case 7:
+                td.style.backgroundColor="grey";
+                break;
 				}
 }
 </script>
