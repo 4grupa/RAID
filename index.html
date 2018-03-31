@@ -8,9 +8,9 @@
 		<script src="raid.js"></script>
 	</head>
 	<body>
-	<p> Ievadi disku skaitu<p>
+	<p> Ievadi disku skaitu 
 		<input type="number" id="raidCount" value="2" maxLength="3">
-		
+
 		<select name="raidlist" form="raidlist" id="raidlist">
   <option value="raid0">RAID0</option>
   <option value="raid1">RAID1</option>
@@ -20,27 +20,38 @@
   <option value="raid5">RAID5</option>
   <option value="raid6">RAID6</option>
 </select>
+
+   Ievadiet informāciju 
+        <input type="number" id="raidInfo" maxLength="100">
+
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
+<div id="div1"> 
+<p id="pText"> RAID masīvs ir divu vai vairāku diskdziņu izmantošana vienu un to pašu datu glabāšanai dažādās vietās uz vairākiem cietajiem diskiem. Kārtojuma RAID diskdziņus parasti izmanto serveros, lai paaugstinātu to bojājumpiecietību un veiktspēju. </p>
+</div>
 <div id="forRaidArray">
 </div>
+
 	</body>
 </html>
 <script>
 function getRaid(){
 var raidCount = document.getElementById("raidCount").value;
 var raid = document.getElementById("raidlist").value;
-         var forRaidArray = document.getElementById('forRaidArray');
+var raidInfo = document.getElementById("raidInfo").value;
+var count = raidInfo.length;
+var forRaidArray = document.getElementById('forRaidArray');
 	while (forRaidArray.firstChild) {
 	forRaidArray.removeChild(forRaidArray.firstChild);
 	}
-
 switch (raid) {
-    case "raid0":
 
+// raid 0
+    case "raid0":
+    var raid0 = document.getElementById('pText').innerHTML = "RAID 0 sadala visus datus vienlīdzīgi pa diviem vai vairāk diskiem. RAID 0 masīvā netiek uzglabāta paritātes informācija. RAID 0 masīvu parasti izmanto, lai paātrinātu disku darbību, taču to iespējams izmantot arī lai izveidotu lielus virtuālos diskus, izmantojot mazus cietos diskus.";
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
+    var iterator=0;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
         var tr = document.createElement('tr');
@@ -57,8 +68,33 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+
+// tabula, kas paredzēta informācijas attēlošanai raid 0 masīvam
+
+   /*var raid0in = document.getElementById('pText').innerHTML = "Tabula, kas attēlo ievadīto informāciju: " + raidInfo + " , redzama nākamajā tabulā." ;*/
+
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < count; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(raidInfo.charAt(i)))
+                coloring(td,0);
+                tr.appendChild(td);    
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
+
         break;
+
+// raid 1
     case "raid1":
+    var raid1 = document.getElementById('pText').innerHTML = "RAID 1 masīvs izveido precīzu datu kopuma kopiju uz diviem vai vairāk diskiem. Tas ir ļoti noderīgi gadījumā, ja datu nolasīšanas ātrums un datu drošība ir svarīgāki faktori par datu glabātuves ietilpību.";
             var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -80,9 +116,31 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+
+// tabula, kas paredzēta informācijas attēlošanai raid 1 masīvam
+
+   /*var raid1in = document.getElementById('pText').innerHTML = "Tabula, kas attēlo ievadīto informāciju: " + raidInfo + " , redzama nākamajā tabulā." ;*/
+    var tbl = document.createElement('table');
+    tbl.style.width = '100%';
+    tbl.setAttribute('border', '1');
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < count; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(raidInfo.charAt(i)))
+                coloring(td,0);
+                tr.appendChild(td);    
+        }
+        tbdy.appendChild(tr);
+    }
+    tbl.appendChild(tbdy);
+    forRaidArray.appendChild(tbl);
         break;
+
+// raid 2
     case "raid2":
-        
+     var raid2 = document.getElementById('pText').innerHTML = "RAID 2 masīvs datus dala pa bitiem (nevis blokiem), un izmanto Hamminga kodu, lai labotu radušās kļūdas. Kontrolieris diskus sinhronizē, lai tie darbotos perfektā tandēmā. RAID 2 masīvā iespējams sasniegt ļoti augstus datu pārraides ātrumus.";
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -114,7 +172,10 @@ switch (raid) {
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
         break;
+
+// raid 3
     case "raid3":
+ var raid3 = document.getElementById('pText').innerHTML = "RAID 3 masīvs izmanto baitu dalījumu un atsevišķu disku, kurā glabājas paritātes informācija. RAID 3 praktiski izmanto ļoti retos gadījumos. Viens no RAID 3 masīva lielākajiem mīnusiem ir tas, ka šis masīvs nespēj veikt vairākas darbības vienlaicīgi. Tas tāpēc, ka jebkurš datu bloks būs novietots uz visiem masīvā esošajiem cietajiem diskiem, līdz ar to jebkurai I/O operācijas veikšanai būs nepieciešama visu cieto disku darbība.";
                     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -146,8 +207,10 @@ switch (raid) {
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
         break;
+
+// raid 4
     case "raid4":
-              
+        var raid4 = document.getElementById('pText').innerHTML = "RAID 4 masīvs sadalīts blokos un tam ir atsevišķs disks, kurā glabājas paritātes informācija. Tas nozīmē, ka katrs masīva disks ir spējīgs darboties patstāvīgi tikai tad, ja datu apstrādei nepieciešams tikai viens bloks. Ja diska kontrolieris to atļauj, tad RAID 4 masīvs var darboties ar vairākām darbībām vienlaicīgi.";      
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -180,8 +243,10 @@ coloring(td,i);
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
         break;
+
+// raid 5
     case "raid5":
-          
+      var raid5 = document.getElementById('pText').innerHTML = "RAID 5 masīvs izmanto bloku sadalījumu un paritātes dati tiek sadalīti pa visiem cietajiem diskiem. Arī lai izveidotu RAID 5 masīvu kā minimums nepieciešami 3 cietie diski.";     
               
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
@@ -211,7 +276,6 @@ coloring(td,i);
         }
 	iterator2--;
             iterator++;
-
             
         
         tbdy.appendChild(tr);
@@ -219,8 +283,10 @@ coloring(td,i);
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
 	break;
+
+// raid 6
     case "raid6":
-              
+    var raid6 = document.getElementById('pText').innerHTML = "RAID 6 papildina RAID 5 pievienojot papildu paritātes bloku. Tas izmanto bloku dalījumu ar diviem paritātes blokiem, kas izkliedēti pa visiem masīva diskiem.";           
               
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
@@ -262,7 +328,6 @@ coloring(td,i);
         }
 	iterator2--;
             iterator++;
-
             
         
         tbdy.appendChild(tr);
@@ -291,6 +356,4 @@ switch(i){
 				break;
 				}
 }
-
-
 </script>
