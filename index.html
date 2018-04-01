@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="number" id="raidInfo" maxLength="100">
+        <input type="number" id="raidInfo" value="1001" maxLength="100">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -125,8 +125,8 @@ switch (raid) {
     forRaidArray.appendChild(tbl);
 
 // tabula, kas paredzēta ielasītās informācijas attēlošanai raid 1 masīvam
-    var raid0in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 1 masīvā." );
-    forRaidArray.appendChild(raid0in);
+    var raid1in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 1 masīvā." );
+    forRaidArray.appendChild(raid1in);
 
     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
@@ -186,6 +186,46 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+       
+// tabula, kas paredzēta ielasītās informācijas attēlošanai raid 2 masīvam
+    var raid2in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 2 masīvā." );
+    forRaidArray.appendChild(raid2in);
+
+    var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+    var iterator= 0;
+    var tbdy = document.createElement('tbody');
+    var raidCount2 = (raidCount * 2 -1);
+    var count2 = (count / raidCount2);
+
+    for (var i = 0; i < count2; i++) {
+        iterator = 0;
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            info = raidInfo.charAt(iterator);
+            iterator++;
+                var td = document.createElement('td');
+                td.height = '20'
+                td.appendChild(document.createTextNode(info))
+                    coloring(td,i);
+                tr.appendChild(td);    
+        }
+        for (var j = 0; j < raidCount-1; j++) {
+            info = raidInfo.charAt(iterator);
+            iterator++;
+                var td = document.createElement('td');
+                td.height = '20'
+                td.appendChild(document.createTextNode(info))
+                    coloring(td,i);
+                tr.appendChild(td);    
+        }
+        tbdy.appendChild(tr);
+    }
+    tb2.appendChild(tbdy);
+    forRaidArray.appendChild(tb2);
+                
+
         break;
 
 // raid 3
