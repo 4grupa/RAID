@@ -68,6 +68,9 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+	
+	
+	
 
 // tabula, kas paredzēta informācijas attēlošanai raid 0 masīvam
  var raid0in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 0 masīvā." );
@@ -349,6 +352,78 @@ coloring(td,i);
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+
+	
+	
+		var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā." );
+                    var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+	 iterator=0;
+	 iteratorStart=0;
+	 var parity=0;
+	 var tmpparity="";
+	 var ii=0;
+     tbdy2 = document.createElement('tbody');
+    for (var i = 0; i < count; i++) {
+		tmpparity="";
+		parity=parseInt(raidInfo.substring(iterator, iterator+5));
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+		
+		
+		
+		info = raidInfo.substring(iterator, iterator+5);  
+
+                var td = document.createElement('td');
+				
+				iterator=iterator+5;
+				i++;
+                td.height = '20'
+                td.appendChild(document.createTextNode(info));
+				
+				tmpparity="";
+				for (k=0;k<5;k++){
+				if (( parity[k] && !parseInt(raidInfo[ii]) ) || ( !parity[k]  && parseInt(raidInfo[ii]) ))
+				{
+				tmpparity=tmpparity+"1";
+				}
+				else
+				{
+				tmpparity=tmpparity+"0";
+				}
+				ii++;
+				}
+				parity=tmpparity;
+				//info2=info2+info;
+                if (info != '')
+                    coloring(td,0);
+                else 
+                    coloring(td,7);
+                
+		//	iterator=iterator+5;
+                tr.appendChild(td);
+			
+        }    
+       
+	
+        //    iterator++;
+                var td = document.createElement('td');
+coloring(td,i);
+                
+                td.appendChild(document.createTextNode(tmpparity));
+                
+                tr.appendChild(td);
+            
+        
+        tbdy2.appendChild(tr);
+    }
+    tb2.appendChild(tbdy2);
+	
+    forRaidArray.appendChild(tb2);	
+	
+	
+	//alert(( 100010 && !100001 ) || ( !100010 && 100001 ));
         break;
 
 // raid 5
