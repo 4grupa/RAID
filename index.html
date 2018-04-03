@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="number" id="raidInfo" value="1001" maxLength="100">
+        <input type="text" id="raidInfo" value="1001" maxLength="100">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -81,8 +81,8 @@ switch (raid) {
     for (var i = 0; i < (count/2)+3; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-            info = raidInfo.charAt(iterator);
-            iterator++;
+            info = raidInfo.substring(iterator, iterator+5);
+            iterator=iterator+5;
              var td = document.createElement('td');
                 td.height = '20'
                 td.appendChild(document.createTextNode(info))
@@ -132,11 +132,11 @@ switch (raid) {
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
     var iterator= 0;
-    var tbdy = document.createElement('tbody');
+    var tbdy2 = document.createElement('tbody');
     for (var i = 0; i < count +3; i++) {
         var tr = document.createElement('tr');
-        info = raidInfo.charAt(iterator);
-        iterator++;
+        info = raidInfo.substring(iterator, iterator+5);
+        iterator=iterator+5;
         for (var j = 0; j < raidCount; j++) {
                 var td = document.createElement('td');
                 td.height = '20'
@@ -147,9 +147,9 @@ switch (raid) {
                     coloring(td,7);
                 tr.appendChild(td);    
         }
-        tbdy.appendChild(tr);
+        tbdy2.appendChild(tr);
     }
-    tb2.appendChild(tbdy);
+    tb2.appendChild(tbdy2);
     forRaidArray.appendChild(tb2);
         break;
 
@@ -203,8 +203,8 @@ switch (raid) {
         iterator = 0;
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-            info = raidInfo.charAt(iterator);
-            iterator++;
+            info = raidInfo.substring(iterator, iterator+5);
+            iterator=iterator+5;
                 var td = document.createElement('td');
                 td.height = '20'
                 td.appendChild(document.createTextNode(info))
@@ -212,8 +212,8 @@ switch (raid) {
                 tr.appendChild(td);    
         }
         for (var j = 0; j < raidCount-1; j++) {
-            info = raidInfo.charAt(iterator);
-            iterator++;
+            info = raidInfo.substring(iterator, iterator+5);
+            iterator=iterator+5;
                 var td = document.createElement('td');
                 td.height = '20'
                 td.appendChild(document.createTextNode(info))
@@ -235,17 +235,17 @@ switch (raid) {
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
 	var iterator=0;
-	var iteratorStart=0;
+	var iteratorStart=1;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
         var tr = document.createElement('tr');
-		iteratorStart=iterator;
-        for (var j = 0; j < raidCount; j++) {
+		iteratorStart=iterator+1;
+        for (var j = 0; j < parseInt(raidCount)+1; j++) {
             
                 var td = document.createElement('td');
 			//	coloring(td,i);
               //toDo  
-				if (j!=raidCount-1){
+				if (j!=raidCount){
 				iterator++;
                 td.appendChild(document.createTextNode('A'+iterator));
                 }
@@ -261,7 +261,59 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+        
+		
+		var raid3in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 3 masīvā." );
+                    var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+	 iterator=0;
+	 iteratorStart=0;
+     tbdy2 = document.createElement('tbody');
+    for (var i = 0; i < count; i++) {
+        var tr = document.createElement('tr');
+		//info = raidInfo.substring(iterator+1, iterator+6);
+		
+		info2 = "";
+		iteratorStart=iterator;
+        for (var j = 0; j < parseInt(raidCount)+1; j++) {
+        info = raidInfo.substring(iterator, iterator+5);    
+                var td = document.createElement('td');
+			//	coloring(td,i);
+              //toDo  
+				if (j!=raidCount){
+				iterator=iterator+5;
+                td.height = '20'
+                td.appendChild(document.createTextNode(info))
+				info2=info2+info;
+                if (info != '')
+                    coloring(td,0);
+                else 
+                    coloring(td,7);
+                }
+				else
+				{
+				td.height = '20'
+                td.appendChild(document.createTextNode(info2))
+				
+                if (info2 != '')
+                    coloring(td,0);
+                else 
+                    coloring(td,7);
+				info2="";
+				}
+                tr.appendChild(td)
+				
+            
+        }
+        tbdy2.appendChild(tr);
+    }
+    tb2.appendChild(tbdy2);
+	
+    forRaidArray.appendChild(tb2);
         break;
+		
+		
 
 // raid 4
     case "raid4":
