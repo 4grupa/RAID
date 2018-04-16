@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="style.css" rel="stylesheet" type="text/css">
-		<script src="http://d3js.org/d3.v3.min.js"></script>
-		<script src="raid.js"></script>
-	</head>
-	<body>
-	<p> Ievadi disku skaitu 
-		<input type="number" id="raidCount" value="2" maxLength="3">
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="raid.js"></script>
+    </head>
+    <body>
+    <p> Ievadi disku skaitu 
+        <input type="number" id="raidCount" value="2" maxLength="3">
 
-		<select name="raidlist" form="raidlist" id="raidlist">
+        <select name="raidlist" form="raidlist" id="raidlist">
   <option value="raid0">RAID0</option>
   <option value="raid1">RAID1</option>
   <option value="raid2">RAID2</option>
@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="number" id="raidInfo" value="1001" maxLength="100">
+        <input type="number" id="raidInfo" value="1001111010101101110" maxLength="100">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -31,7 +31,7 @@
 <div id="forRaidArray">
 </div>
 
-	</body>
+    </body>
 </html>
 <script>
 function getRaid(){
@@ -40,11 +40,10 @@ var raid = document.getElementById("raidlist").value;
 var raidInfo = document.getElementById("raidInfo").value;
 var count = raidInfo.length;
 var forRaidArray = document.getElementById('forRaidArray');
-	while (forRaidArray.firstChild) {
-	forRaidArray.removeChild(forRaidArray.firstChild);
-	}
+    while (forRaidArray.firstChild) {
+    forRaidArray.removeChild(forRaidArray.firstChild);
+    }
 switch (raid) {
-
 // raid 0
     case "raid0":
     var raid0 = document.getElementById('pText').innerHTML = "RAID 0 sadala visus datus vienlīdzīgi pa diviem vai vairāk diskiem. RAID 0 masīvā netiek uzglabāta paritātes informācija. RAID 0 masīvu parasti izmanto, lai paātrinātu disku darbību, taču to iespējams izmantot arī lai izveidotu lielus virtuālos diskus, izmantojot mazus cietos diskus.";
@@ -68,20 +67,18 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
-	
-	
-	
-
+    
+    
+    
 // tabula, kas paredzēta informācijas attēlošanai raid 0 masīvam
  var raid0in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 0 masīvā." );
     forRaidArray.appendChild(raid0in);
-
     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
     var iterator= 0;
     var tbdy = document.createElement('tbody');
-    for (var i = 0; i < (count/2)+3; i++) {
+    for (var i = 0; i < 5; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             info = raidInfo.substring(iterator, iterator+5);
@@ -99,7 +96,44 @@ switch (raid) {
     }
     tb2.appendChild(tbdy);
     forRaidArray.appendChild(tb2);
+
+// tabula, kas paredzēta informācijas nolasīšans attēlošanai raid 0 masīvam
+ var raid0out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 0 masīvā." );
+    forRaidArray.appendChild(raid0out);
+var nolInfo = "";
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+            //iterator=iterator+5;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(iterator))
+                nolInfo = nolInfo + " " + iterator;
+                coloring(td,0);
+                
+                tr.appendChild(td);   
+        }
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+
+    var raid0nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    forRaidArray.appendChild(raid0nol);
+
+// raid 0 atjaunošana
+    
+     var raid0atj = document.createTextNode('<br />' + "RAID 0 komponenšu sabojāšanās gadījumā informāciju nav iespējams atjaunot.");
+
+    forRaidArray.appendChild(raid0atj);
         break;
+
+
 
 // raid 1
     case "raid1":
@@ -108,11 +142,11 @@ switch (raid) {
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
+    var iterator=0;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
         var tr = document.createElement('tr');
-		iterator++;
+        iterator++;
         for (var j = 0; j < raidCount; j++) {
             
                 var td = document.createElement('td');
@@ -126,11 +160,9 @@ switch (raid) {
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
-
 // tabula, kas paredzēta ielasītās informācijas attēlošanai raid 1 masīvam
     var raid1in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 1 masīvā." );
     forRaidArray.appendChild(raid1in);
-
     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
@@ -155,17 +187,16 @@ switch (raid) {
     tb2.appendChild(tbdy2);
     forRaidArray.appendChild(tb2);
         break;
-
 // raid 2
     case "raid2":
      var raid2 = document.getElementById('pText').innerHTML = "RAID 2 masīvs datus dala pa bitiem (nevis blokiem), un izmanto Hamminga kodu, lai labotu radušās kļūdas. Kontrolieris diskus sinhronizē, lai tie darbotos perfektā tandēmā. RAID 2 masīvā iespējams sasniegt ļoti augstus datu pārraides ātrumus.";
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
+    var iterator=0;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
-	iterator=0;
+    iterator=0;
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             iterator++;
@@ -176,7 +207,7 @@ switch (raid) {
                 tr.appendChild(td);
             
         }
-		for (var j = 0; j < raidCount-1; j++) {
+        for (var j = 0; j < raidCount-1; j++) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'+(j+1)))
@@ -193,7 +224,6 @@ switch (raid) {
 // tabula, kas paredzēta ielasītās informācijas attēlošanai raid 2 masīvam
     var raid2in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 2 masīvā." );
     forRaidArray.appendChild(raid2in);
-
     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
@@ -201,7 +231,6 @@ switch (raid) {
     var tbdy = document.createElement('tbody');
     var raidCount2 = (raidCount * 2 -1);
     var count2 = (count / raidCount2);
-
     for (var i = 0; i < count2; i++) {
         iterator = 0;
         var tr = document.createElement('tr');
@@ -228,36 +257,34 @@ switch (raid) {
     tb2.appendChild(tbdy);
     forRaidArray.appendChild(tb2);
                 
-
         break;
-
 // raid 3
     case "raid3":
  var raid3 = document.getElementById('pText').innerHTML = "RAID 3 masīvs izmanto baitu dalījumu un atsevišķu disku, kurā glabājas paritātes informācija. RAID 3 praktiski izmanto ļoti retos gadījumos. Viens no RAID 3 masīva lielākajiem mīnusiem ir tas, ka šis masīvs nespēj veikt vairākas darbības vienlaicīgi. Tas tāpēc, ka jebkurš datu bloks būs novietots uz visiem masīvā esošajiem cietajiem diskiem, līdz ar to jebkurai I/O operācijas veikšanai būs nepieciešama visu cieto disku darbība.";
                     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
-	var iteratorStart=1;
+    var iterator=0;
+    var iteratorStart=1;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
         var tr = document.createElement('tr');
-		iteratorStart=iterator+1;
+        iteratorStart=iterator+1;
         for (var j = 0; j < parseInt(raidCount)+1; j++) {
             
                 var td = document.createElement('td');
-			//	coloring(td,i);
+            //  coloring(td,i);
               //toDo  
-				if (j!=raidCount){
-				iterator++;
+                if (j!=raidCount){
+                iterator++;
                 td.appendChild(document.createTextNode('A'+iterator));
                 }
-				else
-				{
-				td.appendChild(document.createTextNode('Ap('+iteratorStart+'-'+iterator+')'));
-				}
+                else
+                {
+                td.appendChild(document.createTextNode('Ap('+iteratorStart+'-'+iterator+')'));
+                }
                 tr.appendChild(td)
-				
+                
             
         }
         tbdy.appendChild(tr);
@@ -265,80 +292,79 @@ switch (raid) {
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
         
-		
-		var raid3in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 3 masīvā." );
+        
+        var raid3in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 3 masīvā." );
                     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
-	 iterator=0;
-	 iteratorStart=0;
+     iterator=0;
+     iteratorStart=0;
      tbdy2 = document.createElement('tbody');
     for (var i = 0; i < count; i++) {
         var tr = document.createElement('tr');
-		//info = raidInfo.substring(iterator+1, iterator+6);
-		
-		info2 = "";
-		iteratorStart=iterator;
+        //info = raidInfo.substring(iterator+1, iterator+6);
+        
+        info2 = "";
+        iteratorStart=iterator;
         for (var j = 0; j < parseInt(raidCount)+1; j++) {
         info = raidInfo.substring(iterator, iterator+5);    
                 var td = document.createElement('td');
-			//	coloring(td,i);
+            //  coloring(td,i);
               //toDo  
-				if (j!=raidCount){
-				iterator=iterator+5;
+                if (j!=raidCount){
+                iterator=iterator+5;
                 td.height = '20'
                 td.appendChild(document.createTextNode(info))
-				info2=info2+info;
+                info2=info2+info;
                 if (info != '')
                     coloring(td,0);
                 else 
                     coloring(td,7);
                 }
-				else
-				{
-				td.height = '20'
+                else
+                {
+                td.height = '20'
                 td.appendChild(document.createTextNode(info2))
-				
+                
                 if (info2 != '')
                     coloring(td,0);
                 else 
                     coloring(td,7);
-				info2="";
-				}
+                info2="";
+                }
                 tr.appendChild(td)
-				
+                
             
         }
         tbdy2.appendChild(tr);
     }
     tb2.appendChild(tbdy2);
-	
+    
     forRaidArray.appendChild(tb2);
         break;
-		
-		
-
+        
+        
 // raid 4
     case "raid4":
         var raid4 = document.getElementById('pText').innerHTML = "RAID 4 masīvs sadalīts blokos un tam ir atsevišķs disks, kurā glabājas paritātes informācija. Tas nozīmē, ka katrs masīva disks ir spējīgs darboties patstāvīgi tikai tad, ja datu apstrādei nepieciešams tikai viens bloks. Ja diska kontrolieris to atļauj, tad RAID 4 masīvs var darboties ar vairākām darbībām vienlaicīgi.";      
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
+    var iterator=0;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i < 5; i++) {
-	iterator=0;
+    iterator=0;
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             iterator++;
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
-				coloring(td,i);
+                coloring(td,i);
                 
                 tr.appendChild(td);
             
         }
-	
+    
             iterator++;
                 var td = document.createElement('td');
 coloring(td,i);
@@ -352,61 +378,59 @@ coloring(td,i);
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
-
-	
-	
-		var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā." );
+    
+    
+        var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā." );
                     var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
-	 iterator=0;
-	 iteratorStart=0;
-	 var parity=0;
-	 var tmpparity="";
-	 var ii=0;
+     iterator=0;
+     iteratorStart=0;
+     var parity=0;
+     var tmpparity="";
+     var ii=0;
      tbdy2 = document.createElement('tbody');
     for (var i = 0; i < count; i++) {
-		tmpparity="";
-		parity=parseInt(raidInfo.substring(iterator, iterator+5));
+        tmpparity="";
+        parity=parseInt(raidInfo.substring(iterator, iterator+5));
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-		
-		
-		
-		info = raidInfo.substring(iterator, iterator+5);  
-
+        
+        
+        
+        info = raidInfo.substring(iterator, iterator+5);  
                 var td = document.createElement('td');
-				
-				iterator=iterator+5;
-				i++;
+                
+                iterator=iterator+5;
+                i++;
                 td.height = '20'
                 td.appendChild(document.createTextNode(info));
-				
-				tmpparity="";
-				for (k=0;k<5;k++){
-				if (( parity[k] && !parseInt(raidInfo[ii]) ) || ( !parity[k]  && parseInt(raidInfo[ii]) ))
-				{
-				tmpparity=tmpparity+"1";
-				}
-				else
-				{
-				tmpparity=tmpparity+"0";
-				}
-				ii++;
-				}
-				parity=tmpparity;
-				//info2=info2+info;
+                
+                tmpparity="";
+                for (k=0;k<5;k++){
+                if (( parity[k] && !parseInt(raidInfo[ii]) ) || ( !parity[k]  && parseInt(raidInfo[ii]) ))
+                {
+                tmpparity=tmpparity+"1";
+                }
+                else
+                {
+                tmpparity=tmpparity+"0";
+                }
+                ii++;
+                }
+                parity=tmpparity;
+                //info2=info2+info;
                 if (info != '')
                     coloring(td,0);
                 else 
                     coloring(td,7);
                 
-		//	iterator=iterator+5;
+        //  iterator=iterator+5;
                 tr.appendChild(td);
-			
+            
         }    
        
-	
+    
         //    iterator++;
                 var td = document.createElement('td');
 coloring(td,i);
@@ -419,13 +443,12 @@ coloring(td,i);
         tbdy2.appendChild(tr);
     }
     tb2.appendChild(tbdy2);
-	
-    forRaidArray.appendChild(tb2);	
-	
-	
-	//alert(( 100010 && !100001 ) || ( !100010 && 100001 ));
+    
+    forRaidArray.appendChild(tb2);  
+    
+    
+    //alert(( 100010 && !100001 ) || ( !100010 && 100001 ));
         break;
-
 // raid 5
     case "raid5":
       var raid5 = document.getElementById('pText').innerHTML = "RAID 5 masīvs izmanto bloku sadalījumu un paritātes dati tiek sadalīti pa visiem cietajiem diskiem. Arī lai izveidotu RAID 5 masīvu kā minimums nepieciešami 3 cietie diski.";     
@@ -433,30 +456,30 @@ coloring(td,i);
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
-	
-	var iterator2=parseInt(raidCount);
+    var iterator=0;
+    
+    var iterator2=parseInt(raidCount);
     var tbdy = document.createElement('tbody');
     for (var i = 0; i <= raidCount; i++) {
-	iterator=0;
+    iterator=0;
         var tr = document.createElement('tr');
         for (var j = 0; j <= raidCount; j++) {
             iterator++;
                 var td = document.createElement('td');
-				     if (iterator2 == j)
-					 
-			   {
-			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
-			   }
-			 else{
+                     if (iterator2 == j)
+                     
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+               }
+             else{
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
-				}
-				coloring(td,i);
+                }
+                coloring(td,i);
                 
                 tr.appendChild(td);
             
         }
-	iterator2--;
+    iterator2--;
             iterator++;
             
         
@@ -464,8 +487,7 @@ coloring(td,i);
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
-	break;
-
+    break;
 // raid 6
     case "raid6":
     var raid6 = document.getElementById('pText').innerHTML = "RAID 6 papildina RAID 5 pievienojot papildu paritātes bloku. Tas izmanto bloku dalījumu ar diviem paritātes blokiem, kas izkliedēti pa visiem masīva diskiem.";           
@@ -473,42 +495,42 @@ coloring(td,i);
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
-	var iterator=0;
-	
-	var iterator2=parseInt(raidCount)+2;
+    var iterator=0;
+    
+    var iterator2=parseInt(raidCount)+2;
     var tbdy = document.createElement('tbody');
     for (var i = 0; i <= parseInt(raidCount)+1; i++) {
-	iterator=0;
+    iterator=0;
         var tr = document.createElement('tr');
         for (var j = 0; j <= parseInt(raidCount)+1; j++) {
             iterator++;
                 var td = document.createElement('td');
-				     if (iterator2 == j+1)
-					 
-			   {
-			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'q'));
-			   iterator--;
-			   }
-			   else if (iterator2 == j+2)
-					 
-			   {
-			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
-			   iterator--;
-			   }
-			 else{
-			 if (iterator2==1&&iterator==parseInt(raidCount)+1)
-			   {
-			   td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
-			   }else
+                     if (iterator2 == j+1)
+                     
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'q'));
+               iterator--;
+               }
+               else if (iterator2 == j+2)
+                     
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+               iterator--;
+               }
+             else{
+             if (iterator2==1&&iterator==parseInt(raidCount)+1)
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+               }else
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+iterator))
-				}
-				
-				coloring(td,i);
+                }
+                
+                coloring(td,i);
                 
                 tr.appendChild(td);
             
         }
-	iterator2--;
+    iterator2--;
             iterator++;
             
         
@@ -516,29 +538,29 @@ coloring(td,i);
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
-	break;
+    break;
 }}
 function coloring(td, i)
 {
 switch(i){
-				case 0:
-				td.style.backgroundColor="#FFB266";
-				break
-				case 1:
-				td.style.backgroundColor="yellow";
-				break;
-				case 2:
-				td.style.backgroundColor="#66FF66";
-				break;
-				case 3:
-				td.style.backgroundColor="#99FFFF";
-				break;
-				case 4:
-				td.style.backgroundColor="#6666FF";
-				break;
+                case 0:
+                td.style.backgroundColor="#FFB266";
+                break
+                case 1:
+                td.style.backgroundColor="yellow";
+                break;
+                case 2:
+                td.style.backgroundColor="#66FF66";
+                break;
+                case 3:
+                td.style.backgroundColor="#99FFFF";
+                break;
+                case 4:
+                td.style.backgroundColor="#6666FF";
+                break;
                 case 7:
                 td.style.backgroundColor="grey";
                 break;
-				}
+                }
 }
 </script>
