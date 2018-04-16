@@ -130,11 +130,13 @@ var nolInfo = "";
     forRaidArray.appendChild(tb3);
 
     var raid0nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+var br = document.createElement("br");
     forRaidArray.appendChild(raid0nol);
+	forRaidArray.appendChild(br);
 
 // raid 0 atjaunošana
     
-     var raid0atj = document.createTextNode('<br />' + "RAID 0 komponenšu sabojāšanās gadījumā informāciju nav iespējams atjaunot.");
+     var  raid0atj = document.createTextNode("RAID 0 komponenšu sabojāšanās gadījumā informāciju nav iespējams atjaunot.");
 
     forRaidArray.appendChild(raid0atj);
         break;
