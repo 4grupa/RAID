@@ -6,12 +6,6 @@
         <link href="style.css" rel="stylesheet" type="text/css">
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="raid.js"></script>
-		<style>
-		table
-		{
-		margin-top:20px;
-		}
-		</style>
     </head>
     <body>
     <p> Ievadi disku skaitu 
@@ -130,13 +124,13 @@ var nolInfo = "";
     forRaidArray.appendChild(tb3);
 
     var raid0nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
-var br = document.createElement("br");
-    forRaidArray.appendChild(raid0nol);
-	forRaidArray.appendChild(br);
+    var br = document.createElement("br");
+     forRaidArray.appendChild(raid0nol);
+   forRaidArray.appendChild(br)
 
 // raid 0 atjaunošana
     
-     var  raid0atj = document.createTextNode("RAID 0 komponenšu sabojāšanās gadījumā informāciju nav iespējams atjaunot.");
+     var raid0atj = document.createTextNode("RAID 0 komponenšu sabojāšanās gadījumā informāciju nav iespējams atjaunot.");
 
     forRaidArray.appendChild(raid0atj);
         break;
@@ -146,7 +140,6 @@ var br = document.createElement("br");
 // raid 1
     case "raid1":
     var raid1 = document.getElementById('pText').innerHTML = "RAID 1 masīvs izveido precīzu datu kopuma kopiju uz diviem vai vairāk diskiem. Tas ir ļoti noderīgi gadījumā, ja datu nolasīšanas ātrums un datu drošība ir svarīgāki faktori par datu glabātuves ietilpību.";
-    
     var tbl = document.createElement('table');
     tbl.style.width = '100%';
     tbl.setAttribute('border', '1');
@@ -176,7 +169,7 @@ var br = document.createElement("br");
     tb2.setAttribute('border', '1');
     var iterator= 0;
     var tbdy2 = document.createElement('tbody');
-    for (var i = 0; i < count +3; i++) {
+    for (var i = 0; i < count /5 +3; i++) {
         var tr = document.createElement('tr');
         info = raidInfo.substring(iterator, iterator+5);
         iterator=iterator+5;
@@ -194,7 +187,47 @@ var br = document.createElement("br");
     }
     tb2.appendChild(tbdy2);
     forRaidArray.appendChild(tb2);
+
+    // tabula, kas paredzēta informācijas nolasīšans attēlošanai raid 1 masīvam
+ var raid1out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 1 masīvā." );
+    forRaidArray.appendChild(raid1out);
+var nolInfo = "";
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+         iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+          nolInfo = nolInfo + " " + iterator;
+         for (var j = 0; j < raidCount; j++) {
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(iterator))
+                coloring(td,0);
+                
+                tr.appendChild(td);   
+        }
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+
+    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+    forRaidArray.appendChild(raid1nol);
+    forRaidArray.appendChild(br)
+
+// raid 0 atjaunošana
+    
+     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā informāciju tiek atjaunota ....");
+
+    forRaidArray.appendChild(raid1atj);
         break;
+
+
+
+
 // raid 2
     case "raid2":
      var raid2 = document.getElementById('pText').innerHTML = "RAID 2 masīvs datus dala pa bitiem (nevis blokiem), un izmanto Hamminga kodu, lai labotu radušās kļūdas. Kontrolieris diskus sinhronizē, lai tie darbotos perfektā tandēmā. RAID 2 masīvā iespējams sasniegt ļoti augstus datu pārraides ātrumus.";
