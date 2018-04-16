@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="number" id="raidInfo" value="1001111010101101110" maxLength="1000">
+        <input type="text" class="textfield" id="raidInfo" value="1001111010101101110" maxLength="1000" onkeypress="return isNumber(event)">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -34,6 +34,14 @@
     </body>
 </html>
 <script>
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 49)) {
+        return false;
+    }
+    return true;
+}
 function getRaid(){
 var raidCount = document.getElementById("raidCount").value;
 var raid = document.getElementById("raidlist").value;
