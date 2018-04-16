@@ -112,7 +112,10 @@ var nolInfo = "";
             iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
             //iterator=iterator+5;
                 var td = document.createElement('td');
-                td.appendChild(document.createTextNode(iterator))
+				var br = document.createElement("br");
+				td.appendChild(br);
+				//td.appendChild(" ");
+                td.appendChild(document.createTextNode(iterator));
                 nolInfo = nolInfo + " " + iterator;
                 coloring(td,0);
                 
