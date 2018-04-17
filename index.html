@@ -543,15 +543,50 @@ var tb2 = document.createElement('table');
     }
     tb2.appendChild(tbdy);
     forRaidArray.appendChild(tb2);
-    
-    
-
 
 // raid 4 nolasīšana
 var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
+
+var raid4out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 4 masīvā." );
+    forRaidArray.appendChild(raid4out);
+
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var iterator=0;
+    var tbdy = document.createElement('tbody');
+    var count2 = (count / 5);
+    var raidCount2 = (count2 /raidCount);
+    var parInfo = 0;
+    var nolInfo = "";
+    for (var i = 0; i < raidCount2; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+            nolInfo = nolInfo + " " + iterator;
+                var td = document.createElement('td');
+                td.height = '20'
+                td.appendChild(document.createTextNode(iterator));
+                coloring(td,i);
+                tr.appendChild(td);  
+                iterator=iterator+5;
+        }
+                var td = document.createElement('td');
+                coloring(td,i); 
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+                tr.appendChild(td);
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+    forRaidArray.appendChild(raid1nol);
+    forRaidArray.appendChild(br)
+
 // raid 4 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
