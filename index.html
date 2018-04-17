@@ -519,24 +519,26 @@ var tb2 = document.createElement('table');
     var tbdy = document.createElement('tbody');
     var count2 = (count / 5);
     var raidCount2 = (count2 /raidCount);
+    //var parInfo = 11111;
     for (var i = 0; i < raidCount2; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             info = raidInfo.substring(iterator, iterator+5);
-            parity = [info];
+            //parity[i] = info;
                 var td = document.createElement('td');
                 td.height = '20'
-                td.appendChild(document.createTextNode(info))
+                td.appendChild(document.createTextNode(info));
                 coloring(td,i);
                 tr.appendChild(td);  
                 iterator=iterator+5;
         }
                 var td = document.createElement('td');
                 coloring(td,i); 
-                for (var k = 0; k < raidCount; k++) {
-                parInfo = parInfo ^ parity[k];
-                }
-                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+                //for (var k = 0; k < raidCount; k++) {
+                //parInfo = parInfo ^ parity[k];
+                //}
+               // document.getElementById('pText').innerHTML = parInfo;
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
                 tr.appendChild(td);
         tbdy.appendChild(tr);
     }
