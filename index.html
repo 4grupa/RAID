@@ -22,7 +22,7 @@
 </select>
 
    Ievadiet informāciju 
-        <input type="text" class="textfield" id="raidInfo" value="11111000001111000001111000001110000011110000011111" maxLength="1000" onkeypress="return isNumber(event)">
+        <input type="text" class="textfield" id="raidInfo" value="1001111010101101110" maxLength="1000" onkeypress="return isNumber(event)">
 
 <button id="getRaid" onclick="getRaid()">Aiziet</button>
 <div id="div1"> 
@@ -508,7 +508,7 @@ var x = document.createElement("H1");
     var t = document.createTextNode("IELASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā. Paritātes disks tiek veidots no iepriekšējo disku datiem ar Izslēdzošā vai (XOR) palīdzību.");
+var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā. Paritātes disks tiek veidots no iepriekšējo disku datiem ar Izslēdzošā VAI (XOR) palīdzību.");
     forRaidArray.appendChild(raid4in);
     
 var tb2 = document.createElement('table');
@@ -519,12 +519,12 @@ var tb2 = document.createElement('table');
     var tbdy = document.createElement('tbody');
     var count2 = (count / 5);
     var raidCount2 = (count2 /raidCount);
-    //var parInfo = 11111;
+    var parInfo = 0;
     for (var i = 0; i < raidCount2; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             info = raidInfo.substring(iterator, iterator+5);
-            //parity[i] = info;
+            parity[i] = info;
                 var td = document.createElement('td');
                 td.height = '20'
                 td.appendChild(document.createTextNode(info));
@@ -534,10 +534,9 @@ var tb2 = document.createElement('table');
         }
                 var td = document.createElement('td');
                 coloring(td,i); 
-                //for (var k = 0; k < raidCount; k++) {
-                //parInfo = parInfo ^ parity[k];
-                //}
-               // document.getElementById('pText').innerHTML = parInfo;
+                for (var k = 0; k < raidCount; k++) {
+                parInfo = (parInfo ^ parity[k]);
+                }
                 td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
                 tr.appendChild(td);
         tbdy.appendChild(tr);
