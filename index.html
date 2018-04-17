@@ -514,79 +514,78 @@ var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informācij
 var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
-    var parity = [];
-    var iterator=0;
-    var tbdy = document.createElement('tbody');
-    var count2 = (count / 5);
-    var raidCount2 = (count2 /raidCount);
-    var parInfo = 0;
+     iterator=0;
+     iteratorStart=0;
+     var parity=0;
+     var tmpparity="";
+     var ii=0;
+	 var col =0;
+	 var raidCount2 = (raidInfo.length / 5);
+     tbdy2 = document.createElement('tbody');
     for (var i = 0; i < raidCount2; i++) {
+	
+        tmpparity="";
+        parity=parseInt(raidInfo.substring(iterator, iterator+5));
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-            info = raidInfo.substring(iterator, iterator+5);
-            parity[i] = info;
+        
+        
+        
+        info = raidInfo.substring(iterator, iterator+5);  
                 var td = document.createElement('td');
+                
+                iterator=iterator+5;
+                i++;
                 td.height = '20'
                 td.appendChild(document.createTextNode(info));
-                coloring(td,i);
-                tr.appendChild(td);  
-                iterator=iterator+5;
-        }
-                var td = document.createElement('td');
-                coloring(td,i); 
-                for (var k = 0; k < raidCount; k++) {
-                parInfo = (parInfo ^ parity[k]);
+                
+                tmpparity="";
+                for (k=0;k<5;k++){
+                if ( parity[k] ^ parseInt(raidInfo[ii]))
+                {
+                tmpparity=tmpparity+"1";
                 }
-                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
+                else
+                {
+                tmpparity=tmpparity+"0";
+                }
+                ii++;
+                }
+                parity=tmpparity;
+               
+                   
+                
                 tr.appendChild(td);
-        tbdy.appendChild(tr);
+				 coloring(td,col);
+                
+            
+        }    
+       
+    
+                var td = document.createElement('td');
+
+                td.appendChild(document.createTextNode(tmpparity));
+                
+                tr.appendChild(td);
+				
+		coloring(td,col);
+                  col++;
+            
+        
+        tbdy2.appendChild(tr);
     }
-    tb2.appendChild(tbdy);
+    tb2.appendChild(tbdy2);
+    
     forRaidArray.appendChild(tb2);
+    
+    
+
 
 // raid 4 nolasīšana
 var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-
-var raid4out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 4 masīvā." );
-    forRaidArray.appendChild(raid4out);
-
-    var tb3 = document.createElement('table');
-    tb3.style.width = '100%';
-    tb3.setAttribute('border', '1');
-    var iterator=0;
-    var tbdy = document.createElement('tbody');
-    var count2 = (count / 5);
-    var raidCount2 = (count2 /raidCount);
-    var parInfo = 0;
-    var nolInfo = "";
-    for (var i = 0; i < raidCount2; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < raidCount; j++) {
-            iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
-            nolInfo = nolInfo + " " + iterator;
-                var td = document.createElement('td');
-                td.height = '20'
-                td.appendChild(document.createTextNode(iterator));
-                coloring(td,i);
-                tr.appendChild(td);  
-                iterator=iterator+5;
-        }
-                var td = document.createElement('td');
-                coloring(td,i); 
-                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'));
-                tr.appendChild(td);
-        tbdy.appendChild(tr);
-    }
-    tb3.appendChild(tbdy);
-    forRaidArray.appendChild(tb3);
-    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
-    var br = document.createElement("br");
-    forRaidArray.appendChild(raid1nol);
-    forRaidArray.appendChild(br)
-
 // raid 4 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
@@ -754,9 +753,6 @@ var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-var raid6at = document.createTextNode("Datus no RAID masīva var atgūt  divu disku sabojāšanās gadījumā. Pastāv četras datu sabojāšanās versijas. Pirmā no tām P un Q disku bojājums. Šajā situācijā tā kā datu faili ir neskarti P un Q vērtības tiek atjaunotas no tiem. Otrā sitācija ir Q diska un viena datu faila nobrukšana. Šajā variantā datu atjaunoošanas process ir līdzīgs RAID 5. Tā kā P disks ir neskarts, datu lauki var tikt atjaunoti izmantojot P vērtības. Pēc datu bloku atgūšanas Q var tikt atgūts, kā pirmajā scenārijā. Trešā situācija ir P diska un vien adatu diska bojājuma gadījums. Q vērtības tiek izmantotas atjaunošanai. Tiek ģenerēts Q balstoties uz atlikušajiem datu diskiem. Tad laukam GF tiek pievienots Q' līdz Q un rezultāts sarēzināts ar  g^-2. Šī procesa rezultātā tiek atgūti datu diska dati. Pēc šī diska atgūšanas P vērtības var tikt atgūtas izmantojot XOR operācijas. Ceturtā situācija ir divu datu disku bojāeja. Šī situācija ir sarežģītākā datu atgūšanas situācija. Izmantojot inverso matricu tiek atjaunots viens datu bloka un izmantojot P vērtības tiek atjaunots arī otrs datu bloks." );
-    forRaidArray.appendChild(raid6at);
-
     break;
 }}
 function coloring(td, i)
