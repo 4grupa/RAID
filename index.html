@@ -323,10 +323,9 @@ var x = document.createElement("H1");
     tb2.setAttribute('border', '1');
     var iterator= 0;
     var tbdy = document.createElement('tbody');
-    var raidCount2 = (raidCount * 2 -1);
-    var count2 = (count / raidCount2);
-    for (var i = 0; i < count2; i++) {
-        iterator = 0;
+    var count2 = (count / 5);
+    var raidCount2 = (count2 /raidCount);
+    for (var i = 0; i < raidCount2; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
             info = raidInfo.substring(iterator, iterator+5);
@@ -338,23 +337,55 @@ var x = document.createElement("H1");
                 tr.appendChild(td);    
         }
         for (var j = 0; j < raidCount-1; j++) {
-            info = raidInfo.substring(iterator, iterator+5);
-            iterator=iterator+5;
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'+(j+1)))
+                coloring(td,i);
+                
+                tr.appendChild(td);  
+        }
+        tbdy.appendChild(tr);
+    }
+    tb2.appendChild(tbdy);
+ // tabula, kas paredzēta informācijas nolasīšans attēlošanai raid 2 masīvam
+    forRaidArray.appendChild(tb2);
+    var x = document.createElement("H1");
+    var t = document.createTextNode("NOLASĪŠANA");
+    x.appendChild(t);
+    forRaidArray.appendChild(x);
+ var raid2out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 2 masīvā." );
+    forRaidArray.appendChild(raid2out);
+var nolInfo = "";
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var nolInfo="";
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+            info = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+            nolInfo = nolInfo + " " + info;
                 var td = document.createElement('td');
                 td.height = '20'
                 td.appendChild(document.createTextNode(info))
                     coloring(td,i);
                 tr.appendChild(td);    
         }
+        for (var j = 0; j < raidCount-1; j++) {
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'+(j+1)))
+                coloring(td,i);
+                
+                tr.appendChild(td);    
+        }
         tbdy.appendChild(tr);
     }
-    tb2.appendChild(tbdy);
-    //raid 2 nolasīšana
-    forRaidArray.appendChild(tb2);
-    var x = document.createElement("H1");
-    var t = document.createTextNode("NOLASĪŠANA");
-    x.appendChild(t);
-    forRaidArray.appendChild(x);
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+    var raid0nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+     forRaidArray.appendChild(raid0nol);
+   forRaidArray.appendChild(br);
     // raid 2 atjaunošana
     var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
