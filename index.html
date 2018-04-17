@@ -243,6 +243,7 @@ var nolInfo = "";
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
     x.appendChild(t);
+        for (var k = 0; k < raidCount; k++) {
     forRaidArray.appendChild(x);
     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā, tā kā informācija ir vienāda visos diskos, iespējams visu informāciju atjaunot no diska, kas nav bojāts.");
     forRaidArray.appendChild(raid1atj);
@@ -273,7 +274,9 @@ var x = document.createElement("H1");
     var br = document.createElement("br");
     forRaidArray.appendChild(raid1nol);
     forRaidArray.appendChild(br)
-        
+ 
+    raidCount--;
+    }
         break;
 
 
