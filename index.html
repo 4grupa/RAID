@@ -242,11 +242,11 @@ var nolInfo = "";
 // raid 1 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
-    x.appendChild(t);
-        for (var k = 0; k < raidCount; k++) {
+    x.appendChild(t);   
     forRaidArray.appendChild(x);
     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā, tā kā informācija ir vienāda visos diskos, iespējams visu informāciju atjaunot no diska, kas nav bojāts.");
-    forRaidArray.appendChild(raid1atj);
+    forRaidArray.appendChild(raid1atj);     
+    for (var k = 0; k < raidCount; k++) {
     var nolInfo = "";
     var tb4 = document.createElement('table');
     tb4.style.width = '100%';
@@ -257,7 +257,6 @@ var x = document.createElement("H1");
          var tr = document.createElement('tr');
         // iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());          
           nolInfo = nolInfo + " " + iterator;
-         
          for (var j = 0; j < raidCount-1; j++) {
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode(iterator))
