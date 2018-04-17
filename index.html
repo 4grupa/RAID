@@ -719,6 +719,9 @@ var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
+var raid6at = document.createTextNode("Datus no RAID masīva var atgūt  divu disku sabojāšanās gadījumā. Pastāv četras datu sabojāšanās versijas. Pirmā no tām P un Q disku bojājums. Šajā situācijā tā kā datu faili ir neskarti P un Q vērtības tiek atjaunotas no tiem. Otrā sitācija ir Q diska un viena datu faila nobrukšana. Šajā variantā datu atjaunoošanas process ir līdzīgs RAID 5. Tā kā P disks ir neskarts, datu lauki var tikt atjaunoti izmantojot P vērtības. Pēc datu bloku atgūšanas Q var tikt atgūts, kā pirmajā scenārijā. Trešā situācija ir P diska un vien adatu diska bojājuma gadījums. Q vērtības tiek izmantotas atjaunošanai. Tiek ģenerēts Q balstoties uz atlikušajiem datu diskiem. Tad laukam GF tiek pievienots Q' līdz Q un rezultāts sarēzināts ar  g^-2. Šī procesa rezultātā tiek atgūti datu diska dati. Pēc šī diska atgūšanas P vērtības var tikt atgūtas izmantojot XOR operācijas. Ceturtā situācija ir divu datu disku bojāeja. Šī situācija ir sarežģītākā datu atgūšanas situācija. Izmantojot inverso matricu tiek atjaunots viens datu bloka un izmantojot P vērtības tiek atjaunots arī otrs datu bloks." );
+    forRaidArray.appendChild(raid6at);
+
     break;
 }}
 function coloring(td, i)
