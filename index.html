@@ -242,11 +242,10 @@ var nolInfo = "";
 // raid 1 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
-    x.appendChild(t);   
+    x.appendChild(t);
     forRaidArray.appendChild(x);
     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā, tā kā informācija ir vienāda visos diskos, iespējams visu informāciju atjaunot no diska, kas nav bojāts.");
-    forRaidArray.appendChild(raid1atj);     
-    
+    forRaidArray.appendChild(raid1atj);
     var nolInfo = "";
     var tb4 = document.createElement('table');
     tb4.style.width = '100%';
@@ -257,6 +256,7 @@ var x = document.createElement("H1");
          var tr = document.createElement('tr');
         // iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());          
           nolInfo = nolInfo + " " + iterator;
+         
          for (var j = 0; j < raidCount-1; j++) {
                 var td = document.createElement('td');
                 td.appendChild(document.createTextNode(iterator))
@@ -273,7 +273,7 @@ var x = document.createElement("H1");
     var br = document.createElement("br");
     forRaidArray.appendChild(raid1nol);
     forRaidArray.appendChild(br)
- 
+        
         break;
 
 
@@ -504,79 +504,47 @@ coloring(td,i);
     forRaidArray.appendChild(tbl);
     
 // raid 4 ielasīšana
-// raid 3 nolasīšana
 var x = document.createElement("H1");
     var t = document.createTextNode("IELASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-        var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā." );
-                    var tb2 = document.createElement('table');
+var raid4in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 4 masīvā. Paritātes disks tiek veidots no iepriekšējo disku datiem ar Izslēdzošā vai (XOR) palīdzību.");
+    forRaidArray.appendChild(raid4in);
+    
+var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
-     iterator=0;
-     iteratorStart=0;
-     var parity=0;
-     var tmpparity="";
-     var ii=0;
-     tbdy2 = document.createElement('tbody');
-    for (var i = 0; i < count; i++) {
-        tmpparity="";
-        parity=parseInt(raidInfo.substring(iterator, iterator+5));
+    var parity = [];
+    var iterator=0;
+    var tbdy = document.createElement('tbody');
+    var count2 = (count / 5);
+    var raidCount2 = (count2 /raidCount);
+    for (var i = 0; i < raidCount2; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j < raidCount; j++) {
-        
-        
-        
-        info = raidInfo.substring(iterator, iterator+5);  
+            info = raidInfo.substring(iterator, iterator+5);
+            parity = [info];
                 var td = document.createElement('td');
-                
-                iterator=iterator+5;
-                i++;
                 td.height = '20'
-                td.appendChild(document.createTextNode(info));
-                
-                tmpparity="";
-                for (k=0;k<5;k++){
-                if (( parity[k] && !parseInt(raidInfo[ii]) ) || ( !parity[k]  && parseInt(raidInfo[ii]) ))
-                {
-                tmpparity=tmpparity+"1";
-                }
-                else
-                {
-                tmpparity=tmpparity+"0";
-                }
-                ii++;
-                }
-                parity=tmpparity;
-                //info2=info2+info;
-                if (info != '')
-                    coloring(td,0);
-                else 
-                    coloring(td,7);
-                
-        //  iterator=iterator+5;
-                tr.appendChild(td);
-            
-        }    
-       
-    
-        //    iterator++;
+                td.appendChild(document.createTextNode(info))
+                coloring(td,i);
+                tr.appendChild(td);  
+                iterator=iterator+5;
+        }
                 var td = document.createElement('td');
-coloring(td,i);
-                
-                td.appendChild(document.createTextNode(tmpparity));
-                
+                coloring(td,i); 
+                for (var k = 0; k < raidCount; k++) {
+                parInfo = parInfo ^ parity[k];
+                }
+                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
                 tr.appendChild(td);
-            
-        
-        tbdy2.appendChild(tr);
+        tbdy.appendChild(tr);
     }
-    tb2.appendChild(tbdy2);
+    tb2.appendChild(tbdy);
+    forRaidArray.appendChild(tb2);
     
-    forRaidArray.appendChild(tb2);  
     
-    
-    //alert(( 100010 && !100001 ) || ( !100010 && 100001 ));
+
 
 // raid 4 nolasīšana
 var x = document.createElement("H1");
@@ -645,32 +613,27 @@ var tb2 = document.createElement('table');
     var iterator=0;
     var iterator2=parseInt(raidCount);
     var tbdy = document.createElement('tbody');
-    var raidCount2 = (raidCount * 2 -1);
-    var count2 = (count / raidCount2);
-    for (var i = 0; i <= count2; i++) {
-    iterator=0;
+    var count2 = (count / 5);
+    var raidCount2 = (count2 /raidCount);
+    for (var i = 0; i <= raidCount2; i++) {
         var tr = document.createElement('tr');
         for (var j = 0; j <= raidCount; j++) {
             info = raidInfo.substring(iterator, iterator+5);
-            iterator=iterator+5;
                 var td = document.createElement('td');
                 td.height = '20'
-                     if (iterator2 == j)
-                     
+            if (iterator2 == j)
                {
                td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
                }
-             else{
+            else{
+                iterator=iterator+5;
                 td.appendChild(document.createTextNode(info))
                 }
                 coloring(td,i);
                 
-                tr.appendChild(td);
-            
+                tr.appendChild(td);   
         }
-    iterator2--;
-            iterator++;
-            
+    iterator2--;    
         
         tbdy.appendChild(tr);
     }
