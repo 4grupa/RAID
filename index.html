@@ -743,6 +743,7 @@ var x = document.createElement("H1");
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
 // raid 5 ielasīšana
+
 var x = document.createElement("H1");
     var t = document.createTextNode("IELASĪŠANA");
     x.appendChild(t);
@@ -754,28 +755,68 @@ var tb2 = document.createElement('table');
     tb2.style.width = '100%';
     tb2.setAttribute('border', '1');
     var iterator=0;
+	
+     var parity=0;
+     var tmpparity="";
+     var ii=0;
+	 var col =0;
     var iterator2=parseInt(raidCount);
     var tbdy = document.createElement('tbody');
     var count2 = (count / 5);
-    var raidCount2 = (count2 /raidCount);
+    var raidCount2 = (count2/raidCount);
     for (var i = 0; i <= raidCount2; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j <= raidCount; j++) {
-            info = raidInfo.substring(iterator, iterator+5);
+			
+		
+	
+        tmpparity="";
+       
+        
+        info = raidInfo.substring(iterator, iterator+5);  
+	parity=info;
                 var td = document.createElement('td');
+                
+                iterator=iterator+5;
                 td.height = '20'
+                td.appendChild(document.createTextNode(info));
+                
+                tmpparity="";
+                for (k=0;k<5;k++){
+                if ( parity[k] ^ parseInt(raidInfo[k+5]))
+                {
+                tmpparity=tmpparity+"1";
+                }
+                else
+                {
+                tmpparity=tmpparity+"0";
+                }
+                ii++;
+                }
+                parity=tmpparity;
+               
+        var tr = document.createElement('tr');
+		iterator=i*5;
+        for (var j = 0; j <= raidCount; j++) {
+
+             info = raidInfo.substring(iterator, iterator+5);         
+                
+			
+                var td = document.createElement('td');
+                td.height = '20';
             if (iterator2 == j)
                {
-               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+			   
+               td.appendChild(document.createTextNode(tmpparity));
                }
             else{
                 iterator=iterator+5;
-                td.appendChild(document.createTextNode(info))
+                td.appendChild(document.createTextNode(info));
                 }
                 coloring(td,i);
                 
                 tr.appendChild(td);   
         }
+		//alert($( "#idd2").count);
+		//document.getElementById("idd2").innerHTML = "aa";
     iterator2--;    
         
         tbdy.appendChild(tr);
@@ -788,76 +829,13 @@ var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-		
-	var raid5out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 5 masīvā." );
-    forRaidArray.appendChild(raid5out);
-var nolInfo = "";
-    var tb3 = document.createElement('table');
-    tb3.style.width = '100%';
-    tb3.setAttribute('border', '1');
-    var iterator=0;
-    var iteratorStart=0;
-    var parity=0;
-     var tmpparity="";
-     var ii=0;
-     var col =0;
-     var raidCount2 = (raidInfo.length / 5);
-     tbdy = document.createElement('tbody');
-    for (var i = 0; i < raidCount2; i++) {
-        tmpparity="";
-        parity=parseInt(raidInfo.substring(iterator, iterator+5));
-        var tr = document.createElement('tr');
-        for (var j = 0; j < raidCount; j++) {
-        info = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
-          nolInfo = nolInfo + " " + info;  
-                var td = document.createElement('td');
-                
-                iterator=iterator+5;
-                i++;
-                td.height = '20'
-                td.appendChild(document.createTextNode(info));
-                
-                tmpparity="";
-                for (k=0;k<5;k++){
-                if ( parity[k] ^ parseInt(raidInfo[ii]))
-                {
-                tmpparity=tmpparity+"1";
-                }
-                else
-                {
-                tmpparity=tmpparity+"0";
-                }
-                ii++;
-                }
-                parity=tmpparity;
-                tr.appendChild(td);
-                 coloring(td,col);   
-        }    
-                var td = document.createElement('td');
-                td.appendChild(document.createTextNode(tmpparity));
-                tr.appendChild(td);        
-        coloring(td,col);
-                  col++;
-        tbdy.appendChild(tr);
-    }
-    tb3.appendChild(tbdy);
-    forRaidArray.appendChild(tb3);
-    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
-    var br = document.createElement("br");
-    forRaidArray.appendChild(raid1nol);
-    forRaidArray.appendChild(br)
-		
 // raid 5 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-		var raid5at = document.createTextNode("Svarīgākā RAID 5 īpašība ir ka paritātes informācija ir izkliedēta pa visiem diskiem, ja viens no diskiem sabojājas, var atgūt pilnīgu informāciju." );
-    forRaidArray.appendChild(raid5at);
-		
-
     break;
-// raid 6
+	// raid 6
     case "raid6":
     var raid6 = document.getElementById('pText').innerHTML = "RAID 6 papildina RAID 5 pievienojot papildu paritātes bloku. Tas izmanto bloku dalījumu ar diviem paritātes blokiem, kas izkliedēti pa visiem masīva diskiem.";           
               
