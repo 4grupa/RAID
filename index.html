@@ -860,12 +860,48 @@ var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
+var raid5out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 5 masīvā." );
+    forRaidArray.appendChild(raid5out);
+var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var nolInfo="";
+    var iterator2=parseInt(raidCount);
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 0; j <= raidCount; j++) {
+            var td = document.createElement('td');
+                td.height = '20'
+            if (iterator2 == j)
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+               }
+            else{
+                info = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+                nolInfo = nolInfo + " " + info;
+                td.appendChild(document.createTextNode(info))
+                }
+                coloring(td,i);
+                
+                tr.appendChild(td);   
+        }
+    iterator2--;    
+        
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+    var raid5nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+    forRaidArray.appendChild(raid5nol);
+    forRaidArray.appendChild(br)
 // raid 5 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
-var raid5at = document.createTextNode("Svarīgākā RAID 5 īpašība ir ka paritātes informācija ir izkliedēta pa visiem diskiem, ja viens no diskiem sabojājas, var atgūt pilnīgu informāciju." );
+        var raid5at = document.createTextNode("Svarīgākā RAID 5 īpašība ir ka paritātes informācija ir izkliedēta pa visiem diskiem, ja viens no diskiem sabojājas, var atgūt pilnīgu informāciju." );
     forRaidArray.appendChild(raid5at);
     break;
 	// raid 6
