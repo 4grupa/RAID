@@ -586,6 +586,64 @@ var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
+
+var raid4out = document.createTextNode("Tabula, kas attēlo ar jaucējfunkcijas palīdzību ievadīto informāciju, lai varētu veikt lasīšanu raid 4 masīvā." );
+    forRaidArray.appendChild(raid4out);
+
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var iterator=0;
+    var iteratorStart=0;
+    var parity=0;
+     var tmpparity="";
+     var ii=0;
+     var col =0;
+     var raidCount2 = (raidInfo.length / 5);
+     tbdy = document.createElement('tbody');
+    for (var i = 0; i < raidCount2; i++) {
+        tmpparity="";
+        parity=parseInt(raidInfo.substring(iterator, iterator+5));
+        var tr = document.createElement('tr');
+        for (var j = 0; j < raidCount; j++) {
+        info = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+          nolInfo = nolInfo + " " + info;  
+                var td = document.createElement('td');
+                
+                iterator=iterator+5;
+                i++;
+                td.height = '20'
+                td.appendChild(document.createTextNode(info));
+                
+                tmpparity="";
+                for (k=0;k<5;k++){
+                if ( parity[k] ^ parseInt(raidInfo[ii]))
+                {
+                tmpparity=tmpparity+"1";
+                }
+                else
+                {
+                tmpparity=tmpparity+"0";
+                }
+                ii++;
+                }
+                parity=tmpparity;
+                tr.appendChild(td);
+                 coloring(td,col);   
+        }    
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(tmpparity));
+                tr.appendChild(td);        
+        coloring(td,col);
+                  col++;
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
+    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+    forRaidArray.appendChild(raid1nol);
+    forRaidArray.appendChild(br)
 // raid 4 atjaunošana
 var x = document.createElement("H1");
     var t = document.createTextNode("ATJAUNOŠANA");
