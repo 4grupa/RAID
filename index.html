@@ -803,7 +803,50 @@ var x = document.createElement("H1");
     var t = document.createTextNode("IELASĪŠANA");
     x.appendChild(t);
     forRaidArray.appendChild(x);
+var raid6in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 6 masīvā." );
+    forRaidArray.appendChild(raid6in);
 
+var tb2 = document.createElement('table');
+    tb2.style.width = '100%';
+    tb2.setAttribute('border', '1');
+    var iterator=0;
+    var iterator2=parseInt(raidCount);
+    var tbdy = document.createElement('tbody');
+    var count2 = (count / 5);
+	
+    var raidCount2 = (count2 /raidCount);
+	
+    for (var i = 0; i <= raidCount2; i++) {
+	
+        var tr = document.createElement('tr');
+        for (var j = 0; j <= raidCount; j++) {
+            info = raidInfo.substring(iterator, iterator+5);
+                var td = document.createElement('td');
+                td.height = '20'
+            if (iterator2 == j)
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+i))+'p'))
+               }
+			else if (iterator2+1 == j)
+               {
+               td.appendChild(document.createTextNode((String.fromCharCode(65+2))+'p'))
+               }
+			else{
+                iterator=iterator+5;
+                td.appendChild(document.createTextNode(info))
+                }
+                coloring(td,i);
+                
+                tr.appendChild(td); 
+		}
+    iterator2--;    
+        
+        tbdy.appendChild(tr);
+    
+	}
+    tb2.appendChild(tbdy);
+    forRaidArray.appendChild(tb2);
+		
 // raid 6 nolasīšana
 var x = document.createElement("H1");
     var t = document.createTextNode("NOLASĪŠANA");
