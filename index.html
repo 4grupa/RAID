@@ -169,6 +169,7 @@ var nolInfo = "";
     }
     tbl.appendChild(tbdy);
     forRaidArray.appendChild(tbl);
+        
 // tabula, kas paredzēta ielasītās informācijas attēlošanai raid 1 masīvam
     var raid1in = document.createTextNode("Tabula, kas attēlo ievadīto informāciju: " + raidInfo + ", ierakstīšanu raid 1 masīvā." );
     forRaidArray.appendChild(raid1in);
@@ -226,15 +227,37 @@ var nolInfo = "";
     forRaidArray.appendChild(raid1nol);
     forRaidArray.appendChild(br)
 
-// raid 0 atjaunošana
+// raid 1 atjaunošana
     
-     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā informāciju tiek atjaunota ....");
+     var raid1atj = document.createTextNode("RAID 1 komponenšu sabojāšanās gadījumā, tā kā informācija ir vienāda visos diskos, iespējams visu informāciju atjaunot no diska, kas nav bojāts.");
+    var nolInfo = "";
+    var tb3 = document.createElement('table');
+    tb3.style.width = '100%';
+    tb3.setAttribute('border', '1');
+    var iterator=0;
+    var tbdy = document.createElement('tbody');
+    for (var i = 0; i < 5; i++) {
+        var tr = document.createElement('tr');
+         iterator = Math.round(Math.random()) + "" + Math.round(Math.random()) + "" + Math.round(Math.random())+ "" + Math.round(Math.random())+ "" + Math.round(Math.random());
+          nolInfo = nolInfo + " " + iterator;
+         for (var j = 0; j < raidCount - 1; j++) {
+                var td = document.createElement('td');
+                td.appendChild(document.createTextNode(iterator))
+                coloring(td,0);
+                
+                tr.appendChild(td);   
+        }
+        tbdy.appendChild(tr);
+    }
+    tb3.appendChild(tbdy);
+    forRaidArray.appendChild(tb3);
 
+    var raid1nol = document.createTextNode("Nolasītā informācija no augšējās tabulas: "  + nolInfo);
+    var br = document.createElement("br");
+    forRaidArray.appendChild(raid1nol);
+    forRaidArray.appendChild(br)
     forRaidArray.appendChild(raid1atj);
         break;
-
-
-
 
 // raid 2
     case "raid2":
